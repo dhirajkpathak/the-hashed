@@ -1,3 +1,7 @@
+//User Authentication
+export const SET_USER = 'SET_USER';
+export const LOG_OUT = 'LOG_OUT';
+
 // Get Products
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 

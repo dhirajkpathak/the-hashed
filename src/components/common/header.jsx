@@ -9,19 +9,29 @@ import SearchForm from './partials/search-form';
 import LoginModal from '../features/modal/login-modal';
 
 import { showModal } from '../../actions';
+import { removeUser } from '../../actions/userActions';
 
-function Header ( props ) {
-    const { container = "container", isWishlist, showModal } = props;
+function Header(props) {
+    const { container = "container", isWishlist, showModal, removeUser } = props;
 
-    function openLoginModal ( e ) {
-        showModal( 'login' );
+    function openLoginModal(e) {
+        showModal('login');
         e.preventDefault();
     }
+
+    const onLogout = () => {
+
+        removeUser();
+        console.log("logged out", props);
+    }
+
+    // console.log("header props: ", props);
+
 
     return (
         <header className="header header-6">
             <div className="header-top">
-                <div className={ container }>
+                <div className={container}>
                     <div className="header-left">
                         <ul className="top-menu top-link-menu d-none d-md-block">
                             <li>
@@ -40,14 +50,26 @@ function Header ( props ) {
                             <a href="https://pinterest.com" className="social-icon social-pinterest" rel="noopener noreferrer" title="Pinterest" target="_blank"><i className="icon-pinterest-p"></i></a>
                             <a href="https://instagram.com" className="social-icon social-instagram" rel="noopener noreferrer" title="Instagram" target="_blank"><i className="icon-instagram"></i></a>
                         </div>
-                        <ul className="top-menu top-link-menu">
-                            <li>
-                                <Link to="#">Links</Link>
-                                <ul>
-                                    <li><Link to="#signin-modal" data-toggle="modal" onClick={ openLoginModal }><i className="icon-user"></i>Login</Link></li>
+                        {
+                            !props.userReducer.loggedIn
+                                ? <ul className="top-menu top-link-menu">
+                                    <li>
+                                        <Link to="#">Links</Link>
+                                        <ul>
+                                            <li><Link to="#signin-modal" data-toggle="modal" onClick={openLoginModal}><i className="icon-user"></i>Login</Link></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
-                        </ul>
+                                : <div className="header-dropdown">
+                                    <Link to="#">{props.userReducer.user.firstname}</Link>
+                                    <div className="header-menu">
+                                        <ul>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/shop/myaccount`}>My Account</Link></li>
+                                            <li><Link to="#" onClick={onLogout}>Logout</Link></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        }
                         <div className="header-dropdown">
                             <Link to="#">USD</Link>
                             <div className="header-menu">
@@ -72,21 +94,21 @@ function Header ( props ) {
             </div>
 
             <div className="header-middle">
-                <div className={ container }>
+                <div className={container}>
                     <div className="header-left">
                         <SearchForm />
                     </div>
 
                     <div className="header-center">
-                        <Link to={ `${process.env.PUBLIC_URL}` } className="logo">
-                            <img src={ `${process.env.PUBLIC_URL}/assets/images/home/logo.png` } alt="Molla Logo" width={ 82 } height={ 20 } />
+                        <Link to={`${process.env.PUBLIC_URL}`} className="logo">
+                            <img src={`${process.env.PUBLIC_URL}/assets/images/home/logo.png`} alt="Molla Logo" width={82} height={20} />
                         </Link>
                     </div>
 
                     <div className="header-right">
-                        <Link to={ `${process.env.PUBLIC_URL}/shop/wishlist` } className="wishlist-link">
+                        <Link to={`${process.env.PUBLIC_URL}/shop/wishlist`} className="wishlist-link">
                             <i className="icon-heart-o"></i>
-                            <span className="wishlist-count">{ isWishlist.length }</span>
+                            <span className="wishlist-count">{isWishlist.length}</span>
                             <span className="wishlist-txt">My Wishlist</span>
                         </Link>
                         <CartMenu />
@@ -95,7 +117,7 @@ function Header ( props ) {
             </div>
 
             <div className="header-bottom sticky-header">
-                <div className={ container }>
+                <div className={container}>
                     <div className="header-left">
                         <button className="mobile-menu-toggler">
                             <span className="sr-only">Toggle mobile menu</span>
@@ -114,10 +136,18 @@ function Header ( props ) {
     );
 }
 
-function mapStateToProps ( state ) {
+function mapStateToProps(state) {
     return {
-        isWishlist: state.wishlist.list
+        isWishlist: state.wishlist.list,
+        userReducer: state.user
     }
 }
 
-export default connect( mapStateToProps, { showModal } )( Header );
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeUser: () => dispatch(removeUser()),
+        showModal: (modal) => dispatch(showModal(modal))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

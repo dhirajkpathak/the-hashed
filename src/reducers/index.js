@@ -7,6 +7,7 @@ import wishlistReducer from './wishlist';
 import compareReducer from './compare';
 import filterReducer from './filter';
 import modalReducer from './modal';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers( {
     data: productReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers( {
     wishlist: wishlistReducer,
     compare: compareReducer,
     filters: filterReducer,
-    modal: modalReducer
+    modal: modalReducer,
+    user: userReducer
 } );
 
 export default rootReducer;
