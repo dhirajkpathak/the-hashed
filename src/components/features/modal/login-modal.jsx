@@ -135,18 +135,16 @@ function LoginModal(props) {
                                             </form>
                                             <div className="form-choice">
                                                 <p className="text-center">or sign in with</p>
-                                                <div className="row">
-                                                    <div className="col-sm-6">
-                                                        <a className="btn btn-login btn-g" href={GOOGLE_AUTH_URL} target="_blank">
+                                                <div className="row d-flex justify-content-center">
+                                                    <div className="col-sm-2">
+                                                        <a className="btn btn-login btn-g" href={GOOGLE_AUTH_URL} >
                                                             <i className="icon-google"></i>
-                                                        Login With Google
-                                                    </a>
+                                                        </a>
                                                     </div>
-                                                    <div className="col-sm-6">
+                                                    <div className="col-sm-2">
                                                         <a to="#" className="btn btn-login btn-f" href={FACEBOOK_AUTH_URL} target="_blank">
                                                             <i className="icon-facebook-f"></i>
-                                                            Login With Facebook
-                                                    </a>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,17 +192,15 @@ function LoginModal(props) {
                                         </form>
                                         <div className="form-choice">
                                             <p className="text-center">or sign in with</p>
-                                            <div className="row">
-                                                <div className="col-sm-6">
+                                            <div className="row d-flex justify-content-center">
+                                                <div className="col-sm-2">
                                                     <a className="btn btn-login btn-g" href={GOOGLE_AUTH_URL} target="_blank">
                                                         <i className="icon-google"></i>
-                                                        Login With Google
                                                     </a>
                                                 </div>
-                                                <div className="col-sm-6">
+                                                <div className="col-sm-2">
                                                     <a to="#" className="btn btn-login btn-f" href={FACEBOOK_AUTH_URL} target="_blank">
                                                         <i className="icon-facebook-f"></i>
-                                                            Login With Facebook
                                                     </a>
                                                 </div>
                                             </div>

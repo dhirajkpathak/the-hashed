@@ -1,5 +1,6 @@
 export const API_BASE_URL = 'https://thehashedbackend.herokuapp.com';
 export const ACCESS_TOKEN = 'accessToken';
+export const USER_INFO = 'userInfo';
 
 export const OAUTH2_REDIRECT_URI = 'http://localhost:3000/oauth2/redirect';
 

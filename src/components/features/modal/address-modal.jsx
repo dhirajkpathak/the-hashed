@@ -45,7 +45,7 @@ function AddressModal(props) {
     //     }
     // })
 
-    const [values, setValues] = useState({...address});
+    const [values, setValues] = useState({ ...address });
 
     useEffect(() => {
         setValues({
@@ -53,20 +53,20 @@ function AddressModal(props) {
         })
     }, [address])
 
-    console.log("values state props: ", values);
+    // console.log("values state props: ", values);
 
 
-    const handleChange = (e) => {
+    // const handleChange = (e) => {
 
-        const { name, value } = e.target;
-        setValues({
-            ...values,
-            [name]: value,
-        });
+    //     const { name, value } = e.target;
+    //     setValues({
+    //         ...values,
+    //         [name]: value,
+    //     });
 
-    };
+    // };
     // console.log("first name: ", values.firstName);
-    
+
     // const name = values['firstName'];
     const { register, handleSubmit, errors } = useForm();
 
@@ -197,61 +197,72 @@ function AddressModal(props) {
                                             <div className="form-row">
                                                 <div className="form-group col-md-6">
                                                     <label htmlFor="first-name">First Name *</label>
-                                                    <input type="text" className="form-control" id="first-name" name="firstName" ref={register({ required: true })} defaultValue={values.firstName} onChange={handleChange} />
+                                                    <input type="text" className="form-control" id="first-name" name="firstName" ref={register({ required: true })} defaultValue={values.firstName} />
                                                 </div>
                                                 <div className="form-group col-md-6">
                                                     <label htmlFor="last-name">Last Name *</label>
-                                                    <input type="text" className="form-control" id="last-name" name="lastName" ref={register({ required: true })} defaultValue={values.lastName} onChange={handleChange} />
+                                                    <input type="text" className="form-control" id="last-name" name="lastName" ref={register({ required: true })} defaultValue={values.lastName} />
                                                 </div>
                                             </div>
 
                                             <div className="form-group">
                                                 <label htmlFor="company-name">Company Name *</label>
-                                                <input type="text" className="form-control" id="company-name" name="companyName" ref={register({ required: true })} defaultValue={values.companyName} onChange={handleChange} />
+                                                <input type="text" className="form-control" id="company-name" name="companyName" ref={register({ required: true })} defaultValue={values.companyName} />
                                             </div>
 
                                             <div className="form-group">
                                                 <label htmlFor="address-line1">Address *</label>
-                                                <input type="text" className="form-control" id="address-line1" name="address1" ref={register({ required: true })} defaultValue={values.address1} onChange={handleChange} />
+                                                <input type="text" className="form-control" id="address-line1" name="address1" ref={register({ required: true })} defaultValue={values.address1} />
                                             </div>
 
                                             <div className="form-group">
                                                 <label htmlFor="address-line2">Address-Line 2*</label>
-                                                <input type="text" className="form-control" id="address-line2" name="address2" ref={register({ required: true })} defaultValue={values.address2} onChange={handleChange} />
+                                                <input type="text" className="form-control" id="address-line2" name="address2" ref={register({ required: true })} defaultValue={values.address2} />
                                             </div>
 
                                             <div className="form-group">
                                                 <label htmlFor="city-name">City *</label>
-                                                <input type="text" className="form-control" id="city-name" name="city" ref={register({ required: true })} defaultValue={values.city} onChange={handleChange} />
+                                                <input type="text" className="form-control" id="city-name" name="city" ref={register({ required: true })} defaultValue={values.city} />
                                             </div>
 
                                             <div className="form-row">
                                                 <div className="form-group col-md-6">
                                                     <label htmlFor="country-name">Country *</label>
-                                                    <input type="text" className="form-control" id="country-name" name="country" ref={register({ required: true })} defaultValue={values.country} onChange={handleChange} />
+                                                    <input type="text" className="form-control" id="country-name" name="country" ref={register({ required: true })} defaultValue={values.country} />
                                                 </div>
                                                 <div className="form-group col-md-6">
                                                     <label htmlFor="region-name">Region *</label>
-                                                    <input type="text" className="form-control" id="region-name" name="region" ref={register({ required: true })} defaultValue={values.region} onChange={handleChange} />
+                                                    <input type="text" className="form-control" id="region-name" name="region" ref={register({ required: true })} defaultValue={values.region} />
                                                 </div>
                                             </div>
 
                                             <div className="form-row">
                                                 <div className="form-group col-md-6">
                                                     <label htmlFor="inputZip">Zip</label>
-                                                    <input type="text" className="form-control" name="zipCode" id="inputZip" defaultValue={values.zipCode} onChange={handleChange} />
+                                                    <input type="text" className="form-control" name="zipCode" id="inputZip" defaultValue={values.zipCode} />
                                                 </div>
                                                 <div className="form-group col-md-6">
                                                     <label htmlFor="register-mobile">Mobile *</label>
-                                                    <input type="text" className="form-control" id="register-mobile" name="mobileNo" ref={register({ required: true })} defaultValue={values.mobileNo} onChange={handleChange} />
+                                                    <input type="text" className="form-control" id="register-mobile" name="mobileNo" ref={register({ required: true })} defaultValue={values.mobileNo} />
                                                 </div>
                                             </div>
-                                            <div className="form-group">
-                                                <div className="form-check">
-                                                    <input className="form-check-input" type="checkbox" id="gridCheck" />
-                                                    <label className="form-check-label" htmlFor="gridCheck">
-                                                        Make this my default address
+                                            <div className="form-row d-flex justify-content-between">
+                                                <div className="form-group">
+                                                    <div className="form-check">
+                                                        <input className="form-check-input" name="isDefault" ref={register} defaultChecked={values.isDefault} type="checkbox" id="defaultAdd" />
+                                                        <label className="form-check-label" htmlFor="defaultAdd">
+                                                            Make this my default address
                                                     </label>
+                                                    </div>
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <div className="form-check">
+                                                        <input className="form-check-input" name="isShippingAddress" ref={register} defaultChecked={values.isShippingAddress} type="checkbox" id="shippingadd" />
+                                                        <label className="form-check-label" htmlFor="shippingadd">
+                                                            Make this my shipping address
+                                                    </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <button type="submit" className="btn btn-primary">Submit</button>
@@ -270,7 +281,7 @@ function AddressModal(props) {
 function mapStateToProps(state, ownProps) {
     // console.log("map state to props state: ", state);
     // console.log("map state to props ownprops: ", ownProps);
-    
+
     return {
         showModal: state.modal.showModal,
         modal: state.modal.modal

@@ -40,17 +40,17 @@ function MyAccount(props) {
     useEffect(() => {
         getAddress().then(add => {
 
-            // console.log("address: ", add);
+            console.log("address: ", add);
             (add.length > 0 ? setAddress(add[0]) : setAddress({}));
         });
         getProfileDetails().then(profileData => {
 
-            console.log("account summary: ", profileData);
+            // console.log("account summary: ", profileData);
             setProfileDetails(profileData);
         });
         getSavedCard().then(card => {
             setCustomerCard(card);
-            console.log("card details: ", card);
+            // console.log("card details: ", card);
 
         })
     }, [])
@@ -109,6 +109,7 @@ function MyAccount(props) {
     const onSubmitAddressData = (data, e) => {
 
         data['id'] = address.id;
+        console.log("address data: ", data);
         updateAddress(data)
             .then(response => {
 
@@ -234,10 +235,14 @@ function MyAccount(props) {
                                                                             {address.region}<br />
                                                                             {address.zipCode}<br />
                                                                             {address.mobileNo}<br />
-                                                                            <Link to="#" onClick={openAddressModal}>Edit <i className="icon-edit"></i></Link>
+                                                                            <span className="d-flex justify-content-between">
+                                                                                <Link to="#" onClick={openAddressModal}>Edit</Link>
+                                                                                <Link to="#">Delete</Link>
+                                                                            </span>
                                                                         </p>
                                                                         : <p>You have not set up this type of address yet.<br />
-                                                                            <Link to="#" onClick={openNewAddressModal}>Add <i className="icon-edit"></i></Link></p>
+                                                                            <Link to="#" onClick={openNewAddressModal}>Add</Link>
+                                                                        </p>
                                                                     }
                                                                 </div>
                                                             </div>
@@ -249,8 +254,8 @@ function MyAccount(props) {
                                                                     <h3 className="card-title">Shipping Address</h3>
 
                                                                     <p>You have not set up this type of address yet.<br />
-                                                                        <Link to="#">Edit <i className="icon-edit"></i></Link>
-                                                                        <Link to="#">Delete <i className="icon-trash"></i></Link></p>
+                                                                        <Link to="#">Add</Link>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>

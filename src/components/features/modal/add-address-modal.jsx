@@ -161,12 +161,14 @@ function AddAddressModal(props) {
                                                     <input type="text" className="form-control" id="register-mobile" name="mobileNo" defaultValue={values.mobileNo} ref={register({ required: true })} onChange={handleChange} />
                                                 </div>
                                             </div>
-                                            <div className="form-group">
-                                                <div className="form-check">
-                                                    <input className="form-check-input" type="checkbox" id="gridCheck" />
-                                                    <label className="form-check-label" htmlFor="gridCheck">
-                                                        Make this my default address
+                                            <div className="form-row">
+                                                <div className="form-group">
+                                                    <div className="form-check">
+                                                        <input className="form-check-input" type="checkbox" id="gridCheck" />
+                                                        <label className="form-check-label" htmlFor="gridCheck">
+                                                            Make this my default address
                                                     </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <button type="submit" className="btn btn-primary">Submit</button>

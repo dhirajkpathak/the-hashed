@@ -1,7 +1,7 @@
 import * as types from '../constants/action-types';
 import { closeModal } from '../actions';
-import { login, signup } from '../utils/APIUtils';
-import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, ACCESS_TOKEN } from '../constants/api-constants';
+import { login, signup, getProfileDetails } from '../utils/APIUtils';
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, ACCESS_TOKEN, USER_INFO } from '../constants/api-constants';
 
 const setUser = (payload) => ({ type: types.SET_USER, payload })
 
@@ -18,8 +18,17 @@ export const fetchUser = (userInfo, modal) => dispatch => {
 
             console.log("Response: ", response);
             localStorage.setItem(ACCESS_TOKEN, response.token);
-            localStorage.setItem("USER_PROFILE", response.user_profile_details)
-            dispatch(setUser(response.user_profile_details))
+            // localStorage.setItem("USER_PROFILE", response.user_profile_details)
+            // dispatch(setUser(response.user_profile_details))
+            // setUserProfile();
+            getProfileDetails()
+                .then(res => {
+
+                    localStorage.setItem(USER_INFO, JSON.stringify(res))
+                    dispatch(setUser(res))
+                }).catch(error => {
+                    console.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                });
             console.log("Login successful");
             dispatch(closeModal(modal))
             // this.props.history.push("/");
@@ -66,6 +75,24 @@ export const signUserUp = (userInfo) => dispatch => {
             localStorage.setItem("token", data.token)
             dispatch(setUser(data.user))
         })
+}
+
+export const setUserProfile = () => dispatch => {
+
+    getProfileDetails()
+        .then(response => {
+
+            console.log("Response154: ", response);
+            // localStorage.setItem(ACCESS_TOKEN, response.token);
+            // localStorage.setItem(USER_INFO, response)
+            localStorage.setItem(USER_INFO, JSON.stringify(response))
+            dispatch(setUser(response))
+            console.log("profile has been set");
+            // dispatch(closeModal(modal))
+            // this.props.history.push("/");
+        }).catch(error => {
+            console.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
 }
 
 export const removeUser = () => dispatch => {

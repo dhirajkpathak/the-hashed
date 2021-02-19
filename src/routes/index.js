@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import LoadingOverlay from '../components/features/loading-overlay';
+import oauth2Page from '../components/oauth2/OAuth2RedirectHandler';
 
 import { scrollTop } from '../utils';
 
@@ -25,6 +26,7 @@ export default function AppRoot() {
                 <Route path={ `${process.env.PUBLIC_URL}/shop` } component={ ShopPages } />
                 <Route path={ `${process.env.PUBLIC_URL}/blog` } component={ BlogPages } />
                 <Route path={ `${process.env.PUBLIC_URL}/pages` } component={ OtherPages } />
+                <Route exact path={ `${process.env.PUBLIC_URL}/oauth2/redirect` } component={ oauth2Page } />
                 <Route path={ `${process.env.PUBLIC_URL}/` } component={ HomePage } />
             </Switch>
         </React.Suspense>

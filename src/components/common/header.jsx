@@ -10,6 +10,7 @@ import LoginModal from '../features/modal/login-modal';
 
 import { showModal } from '../../actions';
 import { removeUser } from '../../actions/userActions';
+import { ACCESS_TOKEN, USER_INFO } from '../../constants/api-constants';
 
 function Header(props) {
     const { container = "container", isWishlist, showModal, removeUser } = props;
@@ -21,8 +22,16 @@ function Header(props) {
 
     const onLogout = () => {
 
+        const useri = localStorage.getItem(USER_INFO);
+        console.log("user profile: ", useri);
         removeUser();
         console.log("logged out", props);
+    }
+
+    const userName = () => {
+
+        const user = props.userReducer.user || '';
+        return <Link to="#">{user.firstName || ''}</Link>;
     }
 
     // console.log("header props: ", props);
@@ -61,7 +70,8 @@ function Header(props) {
                                     </li>
                                 </ul>
                                 : <div className="header-dropdown">
-                                    <Link to="#">{props.userReducer.user.firstname}</Link>
+                                    {/* <Link to="#">{props.userReducer.user.firstName || ''}</Link> */}
+                                    {userName}
                                     <div className="header-menu">
                                         <ul>
                                             <li><Link to={`${process.env.PUBLIC_URL}/shop/myaccount`}>My Account</Link></li>
