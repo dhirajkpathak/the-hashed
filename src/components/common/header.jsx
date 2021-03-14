@@ -28,7 +28,7 @@ function Header(props) {
         console.log("logged out", props);
     }
 
-    const userName = () => {
+    const UserName = () => {
 
         const user = props.userReducer.user || '';
         return <Link to="#">{user.firstName || ''}</Link>;
@@ -61,24 +61,24 @@ function Header(props) {
                         </div>
                         {
                             !props.userReducer.loggedIn
-                                ? <ul className="top-menu top-link-menu">
+                                ? (<ul className="top-menu top-link-menu">
                                     <li>
                                         <Link to="#">Links</Link>
                                         <ul>
                                             <li><Link to="#signin-modal" data-toggle="modal" onClick={openLoginModal}><i className="icon-user"></i>Login</Link></li>
                                         </ul>
                                     </li>
-                                </ul>
-                                : <div className="header-dropdown">
+                                </ul>) :
+                                (<div className="header-dropdown">
                                     {/* <Link to="#">{props.userReducer.user.firstName || ''}</Link> */}
-                                    {userName}
+                                    <UserName />
                                     <div className="header-menu">
                                         <ul>
                                             <li><Link to={`${process.env.PUBLIC_URL}/shop/myaccount`}>My Account</Link></li>
                                             <li><Link to="#" onClick={onLogout}>Logout</Link></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>)
                         }
                         <div className="header-dropdown">
                             <Link to="#">USD</Link>
@@ -111,7 +111,8 @@ function Header(props) {
 
                     <div className="header-center">
                         <Link to={`${process.env.PUBLIC_URL}`} className="logo">
-                            <img src={`${process.env.PUBLIC_URL}/assets/images/home/logo.png`} alt="Molla Logo" width={82} height={20} />
+                            {/* <img src={`${process.env.PUBLIC_URL}/assets/images/home/logo.png`} alt="Molla Logo" width={82} height={20} /> */}
+                            <h2><i>|#'</i></h2>
                         </Link>
                     </div>
 

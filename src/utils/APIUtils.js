@@ -107,3 +107,33 @@ export function addCustomerCard(profiledata) {
         body: JSON.stringify(profiledata)
     });
 }
+
+//Cart API
+export function addItemToCart(cartItems) {
+    return request({
+        url: API_BASE_URL + "/hashedApi/addCart",
+        method: 'POST',
+        body: JSON.stringify(cartItems)
+    });
+}
+
+export function getCartCount() {
+    return request({
+        url: API_BASE_URL + "/hashedApi/countCartQuantity",
+        method: 'GET',
+    });
+}
+
+export function removeItemFromCart(cartId) {
+    return request({
+        url: API_BASE_URL + "/hashedApi/deleteCart?cartId=" + cartId,
+        method: 'DELETE'
+    });
+}
+//Product API
+export function getLatestProduct() {
+    return request({
+        url: API_BASE_URL + "/hashedApi/latestProducts",
+        method: 'GET',
+    });
+}

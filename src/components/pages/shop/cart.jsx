@@ -9,7 +9,8 @@ import Breadcrumb from '../../common/breadcrumb';
 
 import { getCartTotal } from '../../../services';
 import { quantityInputs, isIEBrowser } from '../../../utils';
-import { changeQty, removeFromCart, changeShipping } from '../../../actions';
+import { changeQty, changeShipping } from '../../../actions';
+import { removeFromCart } from '../../../actions/cartActions';
 
 function Cart( props ) {
     const { cartlist, total, removeFromCart, prevShip } = props;

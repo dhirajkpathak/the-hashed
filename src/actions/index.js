@@ -93,16 +93,6 @@ export const addToCartFromWishlist = ( product, qty ) => ( dispatch ) => {
     dispatch( addToCartUnsafe( product, qty ) )
 }
 
-// remove item from cart
-export const removeFromCart = productId => ( dispatch ) => {
-    toast.error( "Item removed from Cart" );
-
-    dispatch( {
-        type: types.REMOVE_FROM_CART,
-        productId
-    } )
-};
-
 // change item's qty
 export const changeQty = ( productId, qty ) => ( {
     type: types.CHANGE_QTY,

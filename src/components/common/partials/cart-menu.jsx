@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getCartCount, getCartTotal } from '../../../services';
-import { removeFromCart } from '../../../actions';
+import { removeFromCart } from '../../../actions/cartActions';
 import { safeContent } from '../../../utils';
 
 function CartMenu ( props ) {

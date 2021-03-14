@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 
@@ -7,14 +7,30 @@ import ProductNine from '../features/product/product-nine';
 
 //Import Service & Actions
 import { getFeaturedProducts } from '../../services';
-import { addToCart, toggleWishlist } from '../../actions';
+import { toggleWishlist } from '../../actions';
+import { addToCart } from '../../actions/cartActions';
+import { getLatestProduct } from '../../utils/APIUtils';
 
 function NewCollection ( props ) {
     const { addToCart, toggleWishlist } = props;
     let products = props.products;
     products = products.slice( 0, 37 );
+    console.log("producttt:; ", products);
+    
+
+    let latestProducts;
+    useEffect(() => {
+
+        getLatestProduct().then(response => {
+
+            console.log("latest product Response: ", response);
+            latestProducts = response;
+        })
+    }, [])
 
     let featuredProducts = getFeaturedProducts( products );
+    console.log("Feature product: ", featuredProducts);
+    
 
     return (
         <div className="container">
