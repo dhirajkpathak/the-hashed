@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 
@@ -13,18 +13,19 @@ import { getLatestProduct } from '../../utils/APIUtils';
 
 function NewCollection ( props ) {
     const { addToCart, toggleWishlist } = props;
+    const [latestProducts, setLatestProducts] = useState([]);
     let products = props.products;
     products = products.slice( 0, 37 );
     console.log("producttt:; ", products);
     
 
-    let latestProducts;
+    // let latestProducts;
     useEffect(() => {
 
         getLatestProduct().then(response => {
 
             console.log("latest product Response: ", response);
-            latestProducts = response;
+            setLatestProducts(response);
         })
     }, [])
 
@@ -39,7 +40,7 @@ function NewCollection ( props ) {
             <div className="products">
                 <div className="row justify-content-center">
                     {
-                        featuredProducts.map( ( item, index ) =>
+                        latestProducts.map( ( item, index ) =>
                             <div className="col-6 col-md-4 col-lg-3" key={ index + item.name }>
                                 <ProductNine product={ item }
                                     adClass="text-center"

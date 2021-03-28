@@ -17,7 +17,7 @@ import { getAddress, updateAddress, updateAccountDetails, getProfileDetails, get
 function MyAccount(props) {
 
     const { showModal } = props;
-    const [address, setAddress] = useState({});
+    const [address, setAddress] = useState([]);
     const [profileDetails, setProfileDetails] = useState({});
     const [customerCard, setCustomerCard] = useState([]);
 
@@ -41,7 +41,7 @@ function MyAccount(props) {
         getAddress().then(add => {
 
             console.log("address: ", add);
-            (add.length > 0 ? setAddress(add[0]) : setAddress({}));
+            (add.length > 0 ? setAddress(add) : setAddress([]));
         });
         getProfileDetails().then(profileData => {
 
@@ -169,13 +169,39 @@ function MyAccount(props) {
         </>
     )
 
+    const BillingAddressComponent = address.map(billingAddress =>
+        <div key={billingAddress.id} className="card card-dashboard">
+            <div className="card-body">
+                {
+                    <p>
+                        {billingAddress.firstName} {billingAddress.lastName}<br />
+                        {billingAddress.companyName}<br />
+                        {billingAddress.address1} {billingAddress.address2}<br />
+                        {billingAddress.city} {billingAddress.country}<br />
+                        {billingAddress.region} {billingAddress.zipCode}<br />
+                        {billingAddress.mobileNo}
+                        <span className="d-flex justify-content-between">
+                            <Link to="#" onClick={openAddressModal}>Edit</Link>
+                            <Link to="#">Delete</Link>
+                        </span>
+                    </p>
+                }
+            </div>
+        </div>
+    );
+
+    const NoAddressComponent = () =>
+        <p>You have not set up this type of address yet.<br />
+            <Link to="#">Add</Link>
+        </p>;
+
     return (
         <>
             <Helmet>
-                <title>Molla React eCommerce Template | My Account</title>
+                <title>The Hashed | My Account</title>
             </Helmet>
 
-            <h1 className="d-none">Molla React eCommerce Template - My Account</h1>
+            <h1 className="d-none">The Hashed - My Account</h1>
 
             <div className="main">
                 <PageHeader title="My Account" subTitle="Shop" />
@@ -217,45 +243,19 @@ function MyAccount(props) {
 
                                                 <TabPanel>
                                                     <p>The following addresses will be used on the checkout page by default.</p>
-
                                                     <div className="row">
                                                         <div className="col-lg-6">
-                                                            <div className="card card-dashboard">
-                                                                <div className="card-body">
-                                                                    <h3 className="card-title">Billing Address</h3>
-
-                                                                    {!!address.firstName
-                                                                        ? <p>
-                                                                            {address.firstName} {address.lastName}<br />
-                                                                            {address.companyName}<br />
-                                                                            {address.address1}<br />
-                                                                            {address.address2}<br />
-                                                                            {address.city}<br />
-                                                                            {address.country}<br />
-                                                                            {address.region}<br />
-                                                                            {address.zipCode}<br />
-                                                                            {address.mobileNo}<br />
-                                                                            <span className="d-flex justify-content-between">
-                                                                                <Link to="#" onClick={openAddressModal}>Edit</Link>
-                                                                                <Link to="#">Delete</Link>
-                                                                            </span>
-                                                                        </p>
-                                                                        : <p>You have not set up this type of address yet.<br />
-                                                                            <Link to="#" onClick={openNewAddressModal}>Add</Link>
-                                                                        </p>
-                                                                    }
-                                                                </div>
-                                                            </div>
+                                                        <h3 className="card-title">Billing Address</h3>
+                                                        <Link to="#" onClick={openNewAddressModal}>Add new address</Link>
+                                                            {address.length > 0 ? BillingAddressComponent : <NoAddressComponent />}
                                                         </div>
 
                                                         <div className="col-lg-6">
+                                                        <h3 className="card-title">Shipping Address</h3>
+                                                        <Link to="#" onClick={openNewAddressModal}>Add new address</Link>
                                                             <div className="card card-dashboard">
                                                                 <div className="card-body">
-                                                                    <h3 className="card-title">Shipping Address</h3>
-
-                                                                    <p>You have not set up this type of address yet.<br />
-                                                                        <Link to="#">Add</Link>
-                                                                    </p>
+                                                                    <NoAddressComponent />
                                                                 </div>
                                                             </div>
                                                         </div>

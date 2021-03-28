@@ -7,14 +7,18 @@ function cartReducer( state = {
     cart: [],
     shipping: "free"
 }, action ) {
+    
     switch ( action.type ) {
         case ADD_TO_CART:
             const productId = action.product.id;
+            console.log("cart reducer action : ", action);
 
             if ( findIndex( state.cart, product => product.id === productId ) !== -1 ) {
                 const cart = state.cart.reduce( ( cartAcc, product ) => {
+                    console.log("Inside cart reducer: ", product);
+                    
                     if ( product.id === productId ) {
-                        cartAcc.push( { ...product, qty: parseInt( product.qty ) + parseInt( action.qty ), sum: ( product.discount ? product.salePrice : product.price ) * ( parseInt( product.qty ) + parseInt( action.qty ) ) } ) // Increment qty
+                        cartAcc.push( { ...product, qty: parseInt( product.qty ) + parseInt( action.qty ), sum: ( product.discount ? product.price - product.discount : product.price ) * ( parseInt( product.qty ) + parseInt( action.qty ) ) } ) // Increment qty
                     } else {
                         cartAcc.push( product )
                     }
@@ -31,7 +35,7 @@ function cartReducer( state = {
                     {
                         ...action.product,
                         qty: action.qty,
-                        sum: ( action.product.discount ? action.product.salePrice : action.product.price ) * action.qty
+                        sum: ( action.product.discount ? action.product.price - action.product.discount : action.product.price ) * action.qty
                     }
                 ]
             }

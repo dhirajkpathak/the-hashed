@@ -2,7 +2,7 @@ import { API_BASE_URL, ACCESS_TOKEN } from '../constants/api-constants';
 
 const request = (options) => {
     const headers = new Headers({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
     })
 
     if (localStorage.getItem(ACCESS_TOKEN)) {
@@ -120,6 +120,13 @@ export function addItemToCart(cartItems) {
 export function getCartCount() {
     return request({
         url: API_BASE_URL + "/hashedApi/countCartQuantity",
+        method: 'GET',
+    });
+}
+
+export function getCartDetails() {
+    return request({
+        url: API_BASE_URL + "/hashedApi/cartDetails",
         method: 'GET',
     });
 }

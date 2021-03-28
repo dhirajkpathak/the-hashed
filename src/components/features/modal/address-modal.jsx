@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { updateAddress } from '../../../utils/APIUtils';
 
 import { closeModal } from '../../../actions';
-import { fetchUser } from '../../../actions/userActions';
 
 const customStyles = {
     content: {
@@ -24,11 +20,7 @@ Modal.setAppElement('#root');
 
 function AddressModal(props) {
     const { showModal, modal, address } = props;
-    console.log("add from props: ", props);
-
-    // const [userAddress, setUserAddress] = useState(address);
-    // const { id, firstName, lastName, companyName, address1, address2, city, country, region, zipCode, mobileNo } = address;
-    let timer;
+    // console.log("add from props: ", props);
 
     function closeModal() {
         document.getElementById("address-modal").classList.remove("ReactModal__Content--after-open");
@@ -53,47 +45,12 @@ function AddressModal(props) {
         })
     }, [address])
 
-    // console.log("values state props: ", values);
-
-
-    // const handleChange = (e) => {
-
-    //     const { name, value } = e.target;
-    //     setValues({
-    //         ...values,
-    //         [name]: value,
-    //     });
-
-    // };
-    // console.log("first name: ", values.firstName);
-
-    // const name = values['firstName'];
     const { register, handleSubmit, errors } = useForm();
 
     const handleAddressSubmit = (data, e) => {
 
         props.onAddressSubmit(data, e);
     }
-
-    // const onSubmitAddressData = (data, e) => {
-
-    //     data['id'] = address.id;
-    //     // data['currency'] = '1';
-    //     console.log("Data: ", data);
-    //     updateAddress(data)
-    //         .then(response => {
-
-    //             console.log("Response: ", response);
-    //             closeModal();
-    //             // localStorage.setItem(ACCESS_TOKEN, response.token);
-    //             // Alert.success("You're successfully logged in!");
-    //             // this.props.history.push("/");
-    //             // redirectLogin();
-
-    //         }).catch(error => {
-    //             console.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-    //         });
-    // };
 
     return (
         <Modal
@@ -110,166 +67,86 @@ function AddressModal(props) {
                     </button>
                     <div className="form-box">
                         <div className="form-tab">
-                            <Tabs selectedTabClassName="show" defaultIndex={0}>
-                                <TabList className="nav nav-pills nav-fill">
 
-                                    <Tab className="nav-item">
-                                        <span className="nav-link">Edit Address</span>
-                                    </Tab>
-                                </TabList>
+                            <h5 className="text-center">Edit Address</h5>
+                            <hr />
 
-                                <div className="tab-content">
+                            <div className="tab-content">
+                                <form onSubmit={handleSubmit(handleAddressSubmit)}>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="first-name">First Name *</label> */}
+                                            <input type="text" placeholder="First Name *" className="form-control" id="first-name" name="firstName" ref={register({ required: true })} defaultValue={values.firstName} />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="last-name">Last Name *</label> */}
+                                            <input type="text" placeholder="Last Name *" className="form-control" id="last-name" name="lastName" ref={register({ required: true })} defaultValue={values.lastName} />
+                                        </div>
+                                    </div>
 
-                                    <TabPanel>
-                                        {/* <form action="#" onSubmit={handleSubmit(onSubmitAddressData)}>
-                                            <div className="form-group">
-                                                <label htmlFor="register-firstname">First Name *</label>
-                                                <input type="text" className="form-control" id="register-firstname" name="firstName" ref={register({ required: true })} />
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="company-name">Company Name *</label> */}
+                                        <input type="text" placeholder="Company Name *" className="form-control" id="company-name" name="companyName" ref={register({ required: true })} defaultValue={values.companyName} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="register-lastname">Last Name *</label>
-                                                <input type="text" className="form-control" id="register-lastname" name="lastName" ref={register({ required: true })} />
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="address-line1">Address *</label> */}
+                                        <input type="text" placeholder="Address *" className="form-control" id="address-line1" name="address1" ref={register({ required: true })} defaultValue={values.address1} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="company-name">Company Name *</label>
-                                                <input type="email" className="form-control" id="company-name" name="companyName" ref={register({ required: true, pattern: /^\S+@\S+$/i })} />
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="address-line2">Address-Line 2*</label> */}
+                                        <input type="text" placeholder="Address-Line 2" className="form-control" id="address-line2" name="address2" ref={register({ required: true })} defaultValue={values.address2} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="address-line1">Address *</label>
-                                                <input type="text" className="form-control" id="address-line1" name="address1" ref={register({ required: true })} />
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="city-name">City *</label> */}
+                                        <input type="text" placeholder="City *" className="form-control" id="city-name" name="city" ref={register({ required: true })} defaultValue={values.city} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="address-line2">Address-Line 2*</label>
-                                                <input type="text" className="form-control" id="address-line2" name="address2" ref={register({ required: true })} />
-                                            </div>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="country-name">Country *</label> */}
+                                            <input type="text" placeholder="Country *" className="form-control" id="country-name" name="country" ref={register({ required: true })} defaultValue={values.country} />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="region-name">Region *</label> */}
+                                            <input type="text" placeholder="Region *" className="form-control" id="region-name" name="region" ref={register({ required: true })} defaultValue={values.region} />
+                                        </div>
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="city-name">City *</label>
-                                                <input type="text" className="form-control" id="city-name" name="city" ref={register({ required: true })} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="country-name">Country *</label>
-                                                <input type="text" className="form-control" id="country-name" name="country" ref={register({ required: true })} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="region-name">Region *</label>
-                                                <input type="text" className="form-control" id="region-name" name="region" ref={register({ required: true })} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="zip-code">Zip / Postal Code *</label>
-                                                <input type="text" className="form-control" id="zip-code" name="zipCode" ref={register({ required: true })} />
-                                            </div>
-
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="form-group name1 col-md-2">
-                                                        <label for="exampleInputEmail1" class="formText">FIRST NAME:*</label>
-                                                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="muverName" />
-                                                    </div>
-
-                                                    <div class="form-group name2 col-md-2">
-                                                        <label for="exampleInputEmail1## Heading ##" class="formText">LAST NAME:*</label>
-                                                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="muverPhone" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="register-mobile">Mobile *</label>
-                                                <input type="text" className="form-control" id="register-mobile" name="mobileNo" ref={register({ required: true })} />
-                                            </div>
-
-                                            <div className="form-footer">
-                                                <button type="submit" className="btn btn-outline-primary-2">
-                                                    <span>Submit</span>
-                                                    <i className="icon-long-arrow-right"></i>
-                                                </button>
-                                            </div>
-                                        </form> */}
-                                        <form onSubmit={handleSubmit(handleAddressSubmit)}>
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="first-name">First Name *</label>
-                                                    <input type="text" className="form-control" id="first-name" name="firstName" ref={register({ required: true })} defaultValue={values.firstName} />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="last-name">Last Name *</label>
-                                                    <input type="text" className="form-control" id="last-name" name="lastName" ref={register({ required: true })} defaultValue={values.lastName} />
-                                                </div>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="company-name">Company Name *</label>
-                                                <input type="text" className="form-control" id="company-name" name="companyName" ref={register({ required: true })} defaultValue={values.companyName} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="address-line1">Address *</label>
-                                                <input type="text" className="form-control" id="address-line1" name="address1" ref={register({ required: true })} defaultValue={values.address1} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="address-line2">Address-Line 2*</label>
-                                                <input type="text" className="form-control" id="address-line2" name="address2" ref={register({ required: true })} defaultValue={values.address2} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="city-name">City *</label>
-                                                <input type="text" className="form-control" id="city-name" name="city" ref={register({ required: true })} defaultValue={values.city} />
-                                            </div>
-
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="country-name">Country *</label>
-                                                    <input type="text" className="form-control" id="country-name" name="country" ref={register({ required: true })} defaultValue={values.country} />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="region-name">Region *</label>
-                                                    <input type="text" className="form-control" id="region-name" name="region" ref={register({ required: true })} defaultValue={values.region} />
-                                                </div>
-                                            </div>
-
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="inputZip">Zip</label>
-                                                    <input type="text" className="form-control" name="zipCode" id="inputZip" defaultValue={values.zipCode} />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="register-mobile">Mobile *</label>
-                                                    <input type="text" className="form-control" id="register-mobile" name="mobileNo" ref={register({ required: true })} defaultValue={values.mobileNo} />
-                                                </div>
-                                            </div>
-                                            <div className="form-row d-flex justify-content-between">
-                                                <div className="form-group">
-                                                    <div className="form-check">
-                                                        <input className="form-check-input" name="isDefault" ref={register} defaultChecked={values.isDefault} type="checkbox" id="defaultAdd" />
-                                                        <label className="form-check-label" htmlFor="defaultAdd">
-                                                            Make this my default address
+                                    <div className="form-row">
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="inputZip">Zip</label> */}
+                                            <input type="text" placeholder="Zip *" className="form-control" name="zipCode" id="inputZip" defaultValue={values.zipCode} />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="register-mobile">Mobile *</label> */}
+                                            <input type="text" placeholder="Mobile *" className="form-control" id="register-mobile" name="mobileNo" ref={register({ required: true })} defaultValue={values.mobileNo} />
+                                        </div>
+                                    </div>
+                                    <div className="form-row d-flex justify-content-between">
+                                        <div className="form-group">
+                                            <div className="form-check">
+                                                <input className="form-check-input" name="isDefault" ref={register} defaultChecked={values.isDefault} type="checkbox" id="defaultAdd" />
+                                                <label className="form-check-label" htmlFor="defaultAdd">
+                                                    Make this my default address
                                                     </label>
-                                                    </div>
-                                                </div>
-
-                                                <div className="form-group">
-                                                    <div className="form-check">
-                                                        <input className="form-check-input" name="isShippingAddress" ref={register} defaultChecked={values.isShippingAddress} type="checkbox" id="shippingadd" />
-                                                        <label className="form-check-label" htmlFor="shippingadd">
-                                                            Make this my shipping address
-                                                    </label>
-                                                    </div>
-                                                </div>
                                             </div>
-                                            <button type="submit" className="btn btn-primary">Submit</button>
-                                        </form>
-                                    </TabPanel>
-                                </div>
-                            </Tabs>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <div className="form-check">
+                                                <input className="form-check-input" name="isShippingAddress" ref={register} defaultChecked={values.isShippingAddress} type="checkbox" id="shippingadd" />
+                                                <label className="form-check-label" htmlFor="shippingadd">
+                                                    Make this my shipping address
+                                                    </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

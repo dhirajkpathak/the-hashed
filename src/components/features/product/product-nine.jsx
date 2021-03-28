@@ -8,9 +8,13 @@ import { findIndex } from '../../../utils';
 function ProductNine ( props ) {
     const { product, isWishlist, onAddToCart, onToggleWishlist, adClass } = props;
 
+    console.log("product 9 product : ", product);
+    
+
     const addToCartHandler = () => {
-        if ( 0 !== product.stock )
+        if ( 0 !== product.stock ) {
             onAddToCart( product, 1 );
+        }
     }
 
     const wishlistHandler = () => {
@@ -33,11 +37,11 @@ function ProductNine ( props ) {
                         <LazyLoadImage
                             alt="product"
                             visibleByDefault={ true }
-                            src={ `${process.env.PUBLIC_URL}/${product.pictures[ 0 ]}` }
+                            src={ `${process.env.PUBLIC_URL}/assets/images/products/single/centered/1-big.jpg` }
                             threshold={ 100 }
                         />
 
-                        { product.pictures[ 1 ] ?
+                        {/* { product.pictures[ 1 ] ?
                             <LazyLoadImage
                                 alt="product"
                                 visibleByDefault={ true }
@@ -46,7 +50,7 @@ function ProductNine ( props ) {
                                 wrapperClassName="product-image-hover product-image"
                             />
                             : ''
-                        }
+                        } */}
                     </Link>
 
                     <div className="product-action-vertical">
@@ -68,19 +72,18 @@ function ProductNine ( props ) {
 
                 <div className="product-body">
                     <div className="product-cat">
-                        { product.category.map( ( cat, index ) => (
-                            <span key={ `cat_${index}` } className="mr-0">
-                                <Link to="#">{ cat }</Link>
-                                { index < product.category.length - 1 ? ', ' : '' }
+                            <span className="mr-0">
+                                <Link to="#">{ product.description }</Link>
                             </span>
-                        ) ) }
                     </div>
 
                     <h3 className="product-title">
                         <Link to={ `${process.env.PUBLIC_URL}/product/default/27` } >{ product.name }</Link>
                     </h3>
 
-                    {
+                    <div className="product-price">${ product.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</div>
+
+                    {/* {
                         0 === product.stock ?
                             <div className="product-price">
                                 <span className="out-price">${ product.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
@@ -93,9 +96,9 @@ function ProductNine ( props ) {
                                 </div> :
 
                                 <div className="product-price">${ product.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</div>
-                    }
+                    } */}
 
-                    {
+                    {/* {
                         product.variants ?
                             product.variants[ 0 ].model ?
                                 <div className="product-nav product-nav-thumbs">
@@ -113,7 +116,7 @@ function ProductNine ( props ) {
                                     ) }
                                 </div>
                             : ''
-                    }
+                    } */}
 
                 </div>
             </div> : ''

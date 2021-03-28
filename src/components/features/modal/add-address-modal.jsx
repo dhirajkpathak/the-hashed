@@ -96,86 +96,77 @@ function AddAddressModal(props) {
                     </button>
                     <div className="form-box">
                         <div className="form-tab">
-                            <Tabs selectedTabClassName="show" defaultIndex={0}>
-                                <TabList className="nav nav-pills nav-fill">
+                            <h5 className="text-center">New Address</h5>
+                            <hr />
 
-                                    <Tab className="nav-item">
-                                        <span className="nav-link">Edit Address</span>
-                                    </Tab>
-                                </TabList>
+                            <div className="tab-content">
 
-                                <div className="tab-content">
+                                <form onSubmit={handleSubmit(onSubmitAddressData)}>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="first-name">First Name *</label> */}
+                                            <input type="text" placeholder="First Name *" className="form-control" id="first-name" name="firstName" defaultValue={values.firstName} ref={register({ required: true })} onChange={handleChange} />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="last-name">Last Name *</label> */}
+                                            <input type="text" placeholder="Last Name *" className="form-control" id="last-name" name="lastName" defaultValue={values.lastName} ref={register({ required: true })} onChange={handleChange} />
+                                        </div>
+                                    </div>
 
-                                    <TabPanel>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="company-name">Company Name *</label> */}
+                                        <input type="text" placeholder="Company Name *" className="form-control" id="company-name" name="companyName" defaultValue={values.companyName} ref={register({ required: true })} onChange={handleChange} />
+                                    </div>
 
-                                        <form onSubmit={handleSubmit(onSubmitAddressData)}>
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="first-name">First Name *</label>
-                                                    <input type="text" className="form-control" id="first-name" name="firstName" defaultValue={values.firstName} ref={register({ required: true })} onChange={handleChange} />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="last-name">Last Name *</label>
-                                                    <input type="text" className="form-control" id="last-name" name="lastName" defaultValue={values.lastName} ref={register({ required: true })} onChange={handleChange} />
-                                                </div>
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="address-line1">Address *</label> */}
+                                        <input type="text" placeholder="Address *" className="form-control" id="address-line1" name="address1" defaultValue={values.address1} ref={register({ required: true })} onChange={handleChange} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="company-name">Company Name *</label>
-                                                <input type="text" className="form-control" id="company-name" name="companyName" defaultValue={values.companyName} ref={register({ required: true })} onChange={handleChange} />
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="address-line2">Address-Line 2*</label> */}
+                                        <input type="text" placeholder="Address-Line 2" className="form-control" id="address-line2" name="address2" defaultValue={values.address2} ref={register({ required: true })} onChange={handleChange} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="address-line1">Address *</label>
-                                                <input type="text" className="form-control" id="address-line1" name="address1" defaultValue={values.address1} ref={register({ required: true })} onChange={handleChange} />
-                                            </div>
+                                    <div className="form-group">
+                                        {/* <label htmlFor="city-name">City *</label> */}
+                                        <input type="text" placeholder="City *" className="form-control" id="city-name" name="city" defaultValue={values.city} ref={register({ required: true })} onChange={handleChange} />
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="address-line2">Address-Line 2*</label>
-                                                <input type="text" className="form-control" id="address-line2" name="address2" defaultValue={values.address2} ref={register({ required: true })} onChange={handleChange} />
-                                            </div>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="country-name">Country *</label> */}
+                                            <input type="text" placeholder="Country *" className="form-control" id="country-name" name="country" defaultValue={values.country} ref={register({ required: true })} onChange={handleChange} />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="region-name">Region *</label> */}
+                                            <input type="text" placeholder="Region *" className="form-control" id="region-name" name="region" defaultValue={values.region} ref={register({ required: true })} onChange={handleChange} />
+                                        </div>
+                                    </div>
 
-                                            <div className="form-group">
-                                                <label htmlFor="city-name">City *</label>
-                                                <input type="text" className="form-control" id="city-name" name="city" defaultValue={values.city} ref={register({ required: true })} onChange={handleChange} />
-                                            </div>
-
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="country-name">Country *</label>
-                                                    <input type="text" className="form-control" id="country-name" name="country" defaultValue={values.country} ref={register({ required: true })} onChange={handleChange} />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="region-name">Region *</label>
-                                                    <input type="text" className="form-control" id="region-name" name="region" defaultValue={values.region} ref={register({ required: true })} onChange={handleChange} />
-                                                </div>
-                                            </div>
-
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="inputZip">Zip</label>
-                                                    <input type="text" className="form-control" name="zipCode" defaultValue={values.zipCode} id="inputZip" onChange={handleChange} />
-                                                </div>
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="register-mobile">Mobile *</label>
-                                                    <input type="text" className="form-control" id="register-mobile" name="mobileNo" defaultValue={values.mobileNo} ref={register({ required: true })} onChange={handleChange} />
-                                                </div>
-                                            </div>
-                                            <div className="form-row">
-                                                <div className="form-group">
-                                                    <div className="form-check">
-                                                        <input className="form-check-input" type="checkbox" id="gridCheck" />
-                                                        <label className="form-check-label" htmlFor="gridCheck">
-                                                            Make this my default address
+                                    <div className="form-row">
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="inputZip">Zip</label> */}
+                                            <input type="text" placeholder="Zip *" className="form-control" name="zipCode" defaultValue={values.zipCode} id="inputZip" onChange={handleChange} />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            {/* <label htmlFor="register-mobile">Mobile *</label> */}
+                                            <input type="text" placeholder="Mobile *" className="form-control" id="register-mobile" name="mobileNo" defaultValue={values.mobileNo} ref={register({ required: true })} onChange={handleChange} />
+                                        </div>
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <div className="form-check">
+                                                <input className="form-check-input" type="checkbox" id="gridCheck" />
+                                                <label className="form-check-label" htmlFor="gridCheck">
+                                                    Make this my default address
                                                     </label>
-                                                    </div>
-                                                </div>
                                             </div>
-                                            <button type="submit" className="btn btn-primary">Submit</button>
-                                        </form>
-                                    </TabPanel>
-                                </div>
-                            </Tabs>
+                                        </div>
+                                    </div>
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
