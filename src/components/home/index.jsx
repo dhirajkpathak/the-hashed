@@ -26,12 +26,12 @@ import style from './style.scss';
 
 export default function HomePage () {
     useEffect( () => {
-        document.getElementById( "menu-home" ).classList.add( "active" );
+        // document.getElementById( "menu-home" ).classList.add( "active" );
 
         style.use();
 
         return ( () => {
-            document.getElementById( "menu-home" ).classList.remove( "active" );
+            // document.getElementById( "menu-home" ).classList.remove( "active" );
             style.unuse();
         } )
     }, [] )

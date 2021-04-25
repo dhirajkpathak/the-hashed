@@ -144,3 +144,18 @@ export function getLatestProduct() {
         method: 'GET',
     });
 }
+
+//Collection
+export function getCollectionHierarchy() {
+    return request({
+        url: API_BASE_URL + "/hashedApi/allCollection",
+        method: 'GET',
+    });
+}
+
+export function getCollectionName() {
+    return request({
+        url: API_BASE_URL + "/hashedApi/collectionsName",
+        method: 'GET',
+    });
+}

@@ -11,11 +11,13 @@ import Wishlist from '../components/pages/shop/wishlist';
 import Cart from '../components/pages/shop/cart';
 import Checkout from '../components/pages/shop/checkout';
 import Market from '../components/pages/shop/market';
+import ShopProduct from '../components/pages/shop/shop-product';
 
 export default function ShopRoute() {
     return (
         <Switch>
             <Layout>
+                <Route exact path={ `${process.env.PUBLIC_URL}/shop/:grid` } component={ ShopProduct } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/category/:grid` } component={ ProductCategory } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/sidebar/:grid` } component={ Sidebar } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/nosidebar/:grid` } component={ NoSidebar } />
