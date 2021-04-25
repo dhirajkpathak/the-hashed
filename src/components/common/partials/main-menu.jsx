@@ -559,7 +559,7 @@ export default function MainMenu(props) {
                                         <ul>
                                         {collectionHierarchy[collection].map((subCollection) => 
                                             <li key={subCollection}><Link to={{
-                                                pathname: `${process.env.PUBLIC_URL}/shop/${subCollection}`,
+                                                pathname: `${process.env.PUBLIC_URL}/shop/products/${subCollection}`,
                                                 state: {
                                                   collection: collection,
                                                   subCollection: subCollection

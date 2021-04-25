@@ -8,7 +8,7 @@ import PageHeader from '../../common/page-header';
 import Breadcrumb from '../../common/breadcrumb';
 
 function ShopProduct( props ) {
-    const type = props.match.params.grid;
+    const type = props.match.params.product;
     const { collection, subCollection } = props.location.state;
     console.log('prop dataaaa: ', collection, subCollection);
     // const title = { "boxed": "Boxed No Sidebar", "fullwidth": "Fullwidth No Sidebar" }

@@ -17,7 +17,6 @@ export default function ShopRoute() {
     return (
         <Switch>
             <Layout>
-                <Route exact path={ `${process.env.PUBLIC_URL}/shop/:grid` } component={ ShopProduct } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/category/:grid` } component={ ProductCategory } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/sidebar/:grid` } component={ Sidebar } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/nosidebar/:grid` } component={ NoSidebar } />
@@ -27,6 +26,7 @@ export default function ShopRoute() {
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/wishlist` } component={ Wishlist } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/cart` } component={ Cart } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/shop/checkout` } component={ Checkout } />
+                <Route path={ `${process.env.PUBLIC_URL}/shop/products/:product` } component={ ShopProduct } />
             </Layout>
         </Switch>
     );
