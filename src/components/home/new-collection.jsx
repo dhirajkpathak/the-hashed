@@ -21,16 +21,17 @@ function NewCollection ( props ) {
 
     // let latestProducts;
     useEffect(() => {
-
+        let isSubscribed = true
         getLatestProduct().then(response => {
 
             console.log("latest product Response: ", response);
             setLatestProducts(response);
         })
+        return () => isSubscribed = false
     }, [])
 
     let featuredProducts = getFeaturedProducts( products );
-    console.log("Feature product: ", featuredProducts);
+    // console.log("Feature product: ", featuredProducts);
     
 
     return (

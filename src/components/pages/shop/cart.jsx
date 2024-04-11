@@ -14,6 +14,7 @@ import { removeFromCart } from '../../../actions/cartActions';
 
 function Cart( props ) {
     const { cartlist, total, removeFromCart, prevShip } = props;
+    console.log("Cart list: ", cartlist);
 
     const [ shipping, setShipping ] = useState( prevShip );
     const shippingPrice = { "free": 0, "standard": 10, "express": 20 };
@@ -70,7 +71,7 @@ function Cart( props ) {
                                                             <div className="product">
                                                                 <figure className="product-media">
                                                                     <Link to={ `${process.env.PUBLIC_URL}/product/default/${item.id}` }>
-                                                                        <img src={ process.env.PUBLIC_URL + '/' + item.pictures[ 0 ] } alt="Product" />
+                                                                        <img src='data:' alt="Product" />
                                                                     </Link>
                                                                 </figure>
 
@@ -83,7 +84,7 @@ function Cart( props ) {
                                                         <td className="price-col">
                                                             ${ 0 < item.discount ?
 
-                                                                item.salePrice.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) :
+                                                                item.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) :
 
                                                                 item.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } )
 
@@ -105,7 +106,7 @@ function Cart( props ) {
                                                         </td>
 
                                                         <td className="total-col">
-                                                            ${ item.sum.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }
+                                                            ${ item.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }
                                                         </td>
 
                                                         <td className="remove-col">

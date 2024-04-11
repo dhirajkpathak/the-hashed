@@ -7,6 +7,7 @@ import { findIndex } from '../../../utils';
 
 function ProductTwo ( props ) {
     const { product, onAddToCart, showQuickView, isWishlist, onToggleWishlist } = props;
+    console.log('product-two: ', product);
 
     const addToCartHandler = () => {
         if ( 0 !== product.stock )
@@ -32,24 +33,24 @@ function ProductTwo ( props ) {
                     { product.new ? <span className="product-label label-new">New</span> : '' }
                     { product.top ? <span className="product-label label-top">Top</span> : '' }
                     { product.discount ? <span className="product-label label-sale">{ product.discount }% off</span> : '' }
-                    { 0 === product.stock ? <span className="product-label label-out">Out Of Stock</span> : '' }
+                    {/* { 0 === product.stock ? <span className="product-label label-out">Out Of Stock</span> : '' } */}
 
                     <Link to={ `${process.env.PUBLIC_URL}/product/default/${product.id}` }>
                         <LazyLoadImage
                             alt="product"
-                            src={ `${process.env.PUBLIC_URL}/${product.pictures[ 0 ]}` }
+                            src={ `${process.env.PUBLIC_URL}/assets/images/products/single/centered/1-big.jpg` }
                             threshold={ 400 }
                         />
 
-                        { product.pictures[ 1 ] ?
+                        {/* { product.pictures[ 1 ] ? */}
                             <LazyLoadImage
                                 alt="product"
-                                src={ `${process.env.PUBLIC_URL}/${product.pictures[ 1 ]}` }
+                                src={ `${process.env.PUBLIC_URL}/assets/images/products/single/centered/2-big.jpg` }
                                 wrapperClassName="product-image-hover product-image"
                                 threshold={ 400 }
                             />
                             : ''
-                        }
+                        {/* } */}
                     </Link>
 
                     <div className="product-action action-icon-top">
@@ -74,7 +75,7 @@ function ProductTwo ( props ) {
 
                     <div className="product-cat">
                         <span className="mr-0">
-                            <Link to="#">{ product.category[ 0 ] }</Link>
+                            {/* <Link to="#">{ product.category[ 0 ] }</Link> */}
                         </span>
                     </div>
 
@@ -90,19 +91,19 @@ function ProductTwo ( props ) {
 
                             0 < product.discount ?
                                 <div className="product-price">
-                                    <span className="new-price">${ product.salePrice.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
+                                    <span className="new-price">${ product.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
                                     <span className="old-price">${ product.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
                                 </div> :
 
                                 <div className="product-price">${ product.price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</div>
                     }
 
-                    <div className="ratings-container">
+                    {/* <div className="ratings-container">
                         <div className="ratings">
                             <div className="ratings-val" style={ { width: product.ratings * 20 + '%' } }></div>
                         </div>
                         <span className="ratings-text">({ product.reviews } Reviews )</span>
-                    </div>
+                    </div> */}
 
                     {
                         product.variants ?

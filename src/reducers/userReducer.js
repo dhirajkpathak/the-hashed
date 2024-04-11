@@ -1,10 +1,10 @@
 import * as types from '../constants/action-types';
 import { ACCESS_TOKEN, USER_INFO } from '../constants/api-constants';
 
-// const defaultState = {
-//     loggedIn: isUserLoggedIn(),
-//     user: getUsersDetails()
-// }
+const defaultState = {
+    loggedIn: isUserLoggedIn(),
+    user: getUsersDetails()
+}
 
 function getUsersDetails() {
 
@@ -12,10 +12,10 @@ function getUsersDetails() {
     return user;
 }
 
-const defaultState = {
-    loggedIn: false,
-    user: {}
-}
+// const defaultState = {
+//     loggedIn: false,
+//     user: {}
+// }
 
 function isUserLoggedIn() {
     if (!localStorage.getItem(ACCESS_TOKEN)) {

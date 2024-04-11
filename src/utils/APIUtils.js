@@ -145,6 +145,27 @@ export function getLatestProduct() {
     });
 }
 
+export function getAllProduct() {
+    return request({
+        url: API_BASE_URL + "/hashedApi/products",
+        method: 'GET',
+    });
+}
+
+export function getProductByCollectionName(collectionName) {
+    return request({
+        url: API_BASE_URL + "/hashedApi/productsByCollection?collectionName=" + collectionName,
+        method: 'GET',
+    });
+}
+
+export function getAllProductBySubcollection(subCollection) {
+    return request({
+        url: API_BASE_URL + "/hashedApi/productsBySubCollection?subCollectionName=" + subCollection,
+        method: 'GET',
+    });
+}
+
 //Collection
 export function getCollectionHierarchy() {
     return request({

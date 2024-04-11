@@ -181,9 +181,10 @@ export const getProductsByCategory = ( products, category ) => {
  * @return {Integer} count of suitable products
  */
 export const getCountByCategory = ( products, category ) => {
-    if ( category === "All" ) return products.length;
-    if ( category === "Sale" ) return products.filter( item => item.discount > 0 ).length;
-    return products.filter( item => -1 !== item.category.indexOf( category ) ).length;
+    // if ( category === "All" ) return products.length;
+    // if ( category === "Sale" ) return products.filter( item => item.discount > 0 ).length;
+    // return products.filter( item => -1 !== item.category.indexOf( category ) ).length;
+    return products.length;
 }
 
 /**
@@ -194,7 +195,7 @@ export const getCountByCategory = ( products, category ) => {
 export const getCartTotal = cartItems => {
     let total = 0;
     for ( let i = 0; i < cartItems.length; i++ ) {
-        total += parseInt( cartItems[ i ].qty, 10 ) * ( cartItems[ i ].discount ? cartItems[ i ].price - cartItems[ i ].discount : cartItems[ i ].price );
+        total += parseInt( cartItems[ i ].quantity, 10 ) * ( cartItems[ i ].discount ? cartItems[ i ].price - cartItems[ i ].discount : cartItems[ i ].price );
     }
     return total;
 }

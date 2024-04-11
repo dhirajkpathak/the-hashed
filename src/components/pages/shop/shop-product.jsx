@@ -6,12 +6,19 @@ import SideBar from '../../features/sidebar/shop-filter';
 import ProductListTwo from '../../features/product/list/product-list-two';
 import PageHeader from '../../common/page-header';
 import Breadcrumb from '../../common/breadcrumb';
+import { getAllProducts, getProductsByCollection, getProductsBySubCollection } from '../../../actions/productAction';
+import store from '../../../store';
 
 function ShopProduct( props ) {
     const type = props.match.params.product;
     const { collection, subCollection } = props.location.state;
-    console.log('prop dataaaa: ', collection, subCollection);
+    // console.log('prop dataaaa: ', collection, subCollection);
     // const title = { "boxed": "Boxed No Sidebar", "fullwidth": "Fullwidth No Sidebar" }
+
+    // useEffect( () => {
+
+    //     (subCollection) ? store.dispatch( getProductsBySubCollection(subCollection) ) : store.dispatch( getProductsByCollection(collection) );
+    // }, [collection, subCollection])
 
     // useEffect( () => {
     //     if ( type !== "boxed" && type !== "fullwidth" ) {
@@ -33,13 +40,13 @@ function ShopProduct( props ) {
             <h1 className="d-none">The Hashed - Shop Product</h1>
 
             <div className="main">
-                <PageHeader title={ subCollection } subTitle="Shop" />
-                <Breadcrumb
+                <PageHeader title={ subCollection } />
+                {/* <Breadcrumb
                     title={ subCollection }
                     parent1={ [ "Shop", "shop/nosidebar" ] }
                     adClass="mb-2"
                     container="container"
-                />
+                /> */}
 
                 <div className="page-content">
                     <div className="container">

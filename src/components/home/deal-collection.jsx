@@ -9,8 +9,8 @@ import { rendererThree } from '../features/count-down';
 function DealCollection ( props ) {
 
     let products = props.products;
-    products = products.slice( 35, 37 );
-    // console.log("products: ", products[ 1 ]);
+    products = products.slice( 2, 4 );
+    console.log("products: ", products);
     
 
     return (
@@ -30,38 +30,38 @@ function DealCollection ( props ) {
                         <div className="row deal-products">
                             <div className="deal-product col-6 text-center">
                                 <figure className="product-media">
-                                    <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 1 ].id}` }>
-                                        <img src={ process.env.PUBLIC_URL + '/' + products[ 1 ].pictures[ 0 ] } alt="Product" className="product-image" />
-                                    </Link>
+                                    {/* <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 1 ].id}` }> */}
+                                        <img src={ `${process.env.PUBLIC_URL}/assets/images/products/single/centered/1-big.jpg` } alt="Product" className="product-image" />
+                                    {/* </Link> */}
                                 </figure>
 
                                 <div className="product-body pt-2">
                                     <div className="product-price">
-                                        <span className="new-price">Now ${ products[ 1 ].salePrice.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
+                                        {/* <span className="new-price">Now ${ products[ 1 ].price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
 
-                                        <span className="old-price">Was ${ products[ 1 ].price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
+                                        <span className="old-price">Was ${ products[ 1 ].price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span> */}
                                     </div>
                                 </div>
 
-                                <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 1 ].id}` } className="action">shop now</Link>
+                                {/* <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 1 ].id}` } className="action">shop now</Link> */}
                             </div>
 
                             <div className="deal-product col-6 text-center">
                                 <figure className="product-media">
-                                    <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 0 ].id}` }>
-                                        <img src={ process.env.PUBLIC_URL + '/' + products[ 0 ].pictures[ 0 ] } alt="Product" className="product-image" />
-                                    </Link>
+                                    {/* <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 0 ].id}` }> */}
+                                        <img src={ `${process.env.PUBLIC_URL}/assets/images/products/single/centered/1-big.jpg` } alt="Product" className="product-image" />
+                                    {/* </Link> */}
                                 </figure>
 
                                 <div className="product-body pt-2">
                                     <div className="product-price">
-                                        <span className="new-price">Now ${ products[ 0 ].salePrice.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
+                                        {/* <span className="new-price">Now ${ products[ 0 ].price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
 
-                                        <span className="old-price">Was ${ products[ 0 ].price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span>
+                                        <span className="old-price">Was ${ products[ 0 ].price.toLocaleString( undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 } ) }</span> */}
                                     </div>
                                 </div>
 
-                                <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 0 ].id}` } className="action">shop now</Link>
+                                {/* <Link to={ `${process.env.PUBLIC_URL}/product/default/${products[ 0 ].id}` } className="action">shop now</Link> */}
                             </div>
                         </div>
                     </div>

@@ -11,15 +11,17 @@ function cartReducer( state = {
     switch ( action.type ) {
         case ADD_TO_CART:
             const productId = action.product.id;
-            console.log("cart reducer action : ", action);
+            // console.log("cart reducer action : ", action);
 
             if ( findIndex( state.cart, product => product.id === productId ) !== -1 ) {
                 const cart = state.cart.reduce( ( cartAcc, product ) => {
-                    console.log("Inside cart reducer: ", product);
+                    // console.log("Inside cart reducer: ", product);
                     
                     if ( product.id === productId ) {
+                        // console.log("inside if : ");
                         cartAcc.push( { ...product, qty: parseInt( product.qty ) + parseInt( action.qty ), sum: ( product.discount ? product.price - product.discount : product.price ) * ( parseInt( product.qty ) + parseInt( action.qty ) ) } ) // Increment qty
                     } else {
+                        // console.log("inside else : ");
                         cartAcc.push( product )
                     }
                     return cartAcc

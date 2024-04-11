@@ -13,6 +13,7 @@ function CartMenu ( props ) {
     console.log("cart list: ", cartlist);
     
     let total = getCartTotal( cartlist );
+    console.log("Total: ", total);
 
     useEffect(() => {
 
@@ -26,7 +27,7 @@ function CartMenu ( props ) {
             //then iterate and call add_to_cart_unsafe for each item of dispatch on caerreducer
             //mapToDispatch has been declared, just need to modify it accordingly
             // dispatch(addToCartUnsafe(productInfo, qty));
-            response.map(items => addToCartUnsafe(items.product, items.product.quantity));
+            response.map(items => addToCartUnsafe(items.product, items.quantity));
             // props.addToCartUnsafe()
         });
     }, [])

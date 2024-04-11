@@ -8,13 +8,13 @@ import { addItemToCart, removeItemFromCart, getCartCount } from '../utils/APIUti
 // add item to cart
 export const addToCart = (productInfo, qty) => (dispatch) => {
 
-    console.log("add to cart productInfo: ", productInfo);
+    // console.log("add to cart productInfo: ", productInfo);
     let productDetails = {product: productInfo.id, status: productInfo.productsStatus, color: productInfo.sizecoloroption.color[0], size: productInfo.sizecoloroption.size[0], quantity: qty}
     
 
     addItemToCart(productDetails).then(response => {
 
-        console.log("Add to cart response: ", response);
+        // console.log("Add to cart response: ", response);
         toast.success("Item Added to Cart");
         dispatch(addToCartUnsafe(productInfo, qty));
     })

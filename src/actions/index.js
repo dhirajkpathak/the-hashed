@@ -2,6 +2,7 @@ import * as api from '../api'
 import * as types from '../constants/action-types'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { getAllProduct, getProductByCollectionName, getAllProductBySubcollection } from '../utils/APIUtils';
 
 /********** Product Action ********/
 // recieve products
@@ -23,8 +24,13 @@ export const refreshStore = ( current ) => dispatch => {
 
 // get all products
 export const getAllProducts = () => dispatch => {
-    api.getProducts().then( products => {
+    // api.getProducts().then( products => {
+    //     dispatch( receiveProducts( products ) );
+    //     return products;
+    // } )
+    getAllProduct().then( products => {
         dispatch( receiveProducts( products ) );
+        // console.log('getAllProducts: ', products);
         return products;
     } )
 }

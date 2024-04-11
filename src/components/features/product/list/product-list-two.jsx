@@ -5,18 +5,22 @@ import ProductEight from '../product-two';
 import QuickView from '../common/quickview';
 
 import { addToCart, toggleWishlist, addToCompare, showQuickViewModal, filterSort } from '../../../../actions';
-import { getVisibleProducts } from '../../../../services';
+import { getAllProducts, getProductsByCollection, getProductsBySubCollection } from '../../../../actions/productAction'
+// import { getVisibleProducts } from '../../../../services';
 
 function ProductListTwo( props ) {
-    let { type, filters, addToCart, toggleWishlist, addToCompare, showQuickViewModal } = props;
+    let { type, filters, addToCart, toggleWishlist, addToCompare, showQuickViewModal, getAllProducts } = props;
     let products = props.products, timer;
+    console.log('product-list-two: ', products);
+    console.log('Typessssss: ', type);
 
     const [ loadedCount, setLoadedCount ] = useState( 8 );
     const [ hasMore, setHasMore ] = useState( true );
     const [ loading, setLoading ] = useState( false );
 
     const classList = { "boxed": "col-6 col-md-4 col-lg-4 col-xl-3", "fullwidth": "col-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2" };
-    products = getVisibleProducts( products.slice( 20, 35 ), filters );
+    //this where products get its data from
+    // products = getVisibleProducts( products.slice( 20, 35 ), filters );
 
     function showSideBar() {
         document.querySelector( 'body' ).classList.add( 'sidebar-filter-active' );
@@ -26,25 +30,25 @@ function ProductListTwo( props ) {
         props.filterSort( e.target.value );
     }
 
-    function loadMore() {
-        // fake async api. products should be fetched from backend
-        if ( loadedCount < products.length ) {
-            setLoading( true );
+    // function loadMore() {
+    //     // fake async api. products should be fetched from backend
+    //     if ( loadedCount < products.length ) {
+    //         setLoading( true );
 
-            timer = setTimeout( () => {
-                setLoadedCount( prevCount => prevCount + 4 );
-                setLoading( false );
+    //         timer = setTimeout( () => {
+    //             setLoadedCount( prevCount => prevCount + 4 );
+    //             setLoading( false );
 
-                if ( loadedCount >= products.length - 4 ) {
-                    setHasMore( false );
-                }
-            }, 2000 );
-        } else {
-            timer = setTimeout( () => {
-                setHasMore( false );
-            }, 500 );
-        }
-    }
+    //             if ( loadedCount >= products.length - 4 ) {
+    //                 setHasMore( false );
+    //             }
+    //         }, 2000 );
+    //     } else {
+    //         timer = setTimeout( () => {
+    //             setHasMore( false );
+    //         }, 500 );
+    //     }
+    // }
 
     useEffect( () => {
         return () => {
@@ -52,19 +56,24 @@ function ProductListTwo( props ) {
         }
     }, [] )
 
-    useEffect( () => {
-        products = getVisibleProducts( props.products.slice( 20, 35 ), filters );
+    useEffect(() => {
+        getAllProducts()
+        // console.log('ALL PROD: ', prod);
+    }, [] )
 
-        if ( products.length > 8 ) {
-            setHasMore( true );
-        } else {
-            setHasMore( false );
-        }
-    }, [ filters ] )
+    // useEffect( () => {
+    //     products = getVisibleProducts( props.products.slice( 20, 35 ), filters );
+
+    //     if ( products.length > 8 ) {
+    //         setHasMore( true );
+    //     } else {
+    //         setHasMore( false );
+    //     }
+    // }, [ filters ] )
 
     return (
         <>
-            <div className="toolbox">
+            {/* <div className="toolbox">
                 <div className="toolbox-left">
                     <button className="sidebar-toggler" onClick={ showSideBar } style={ { padding: "0" } }><i className="icon-bars"></i>Filters</button>
                 </div>
@@ -87,12 +96,12 @@ function ProductListTwo( props ) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="products mb-3">
                 <div className="row">
                     { products.slice( 0, loadedCount ).map( ( item, index ) =>
-                        <div className={ classList[ type ] } key={ item.id }>
+                        <div className={ classList[ "boxed" ] } key={ item.id }>
                             <ProductEight
                                 product={ item }
                                 onAddToCart={ addToCart }
@@ -106,7 +115,7 @@ function ProductListTwo( props ) {
                 <QuickView />
             </div>
 
-            <div className="load-more-container text-center">
+            {/* <div className="load-more-container text-center">
                 {
                     hasMore ?
                         <button className="btn btn-outline-darker btn-load-more" onClick={ loadMore }><span>More Products </span>
@@ -117,7 +126,7 @@ function ProductListTwo( props ) {
                         </button>
                         : ''
                 }
-            </div>
+            </div> */}
         </>
     );
 }
@@ -131,6 +140,6 @@ export const mapStateToProps = ( state ) => {
 
 export default connect(
     mapStateToProps, {
-        addToCart, toggleWishlist, addToCompare, showQuickViewModal, filterSort
+        addToCart, toggleWishlist, addToCompare, showQuickViewModal, filterSort, getAllProducts
     }
 )( ProductListTwo );

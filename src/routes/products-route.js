@@ -15,6 +15,7 @@ export default function ProductsRoute() {
     return (
         <Switch>
             <Layout>
+                <Route exact path={ `${process.env.PUBLIC_URL}/product/:subcollection` } component={ Default } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/product/default/:id` } component={ Default } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/product/centered/:id` } component={ Centered } />
                 <Route exact path={ `${process.env.PUBLIC_URL}/product/extended/:id` } component={ ExtendedInfo } />
